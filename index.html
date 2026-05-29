@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noite em Rio Preto - Guia de Turismo Noturno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF006E;
+            --secondary: #00D9FF;
+            --accent: #FFBE0B;
+            --background: #000000;
+            --foreground: #FFFFFF;
+            --card-bg: #0A0A0A;
+            --border-color: #333333;
+            --muted: #AAAAAA;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animações */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-in-left {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes neon-glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 0, 110, 0.5), 0 0 20px rgba(255, 0, 110, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 0, 110, 0.8), 0 0 30px rgba(255, 0, 110, 0.5);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(0, 217, 255, 0.3), inset 0 0 5px rgba(0, 217, 255, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(0, 217, 255, 0.6), inset 0 0 10px rgba(0, 217, 255, 0.2);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/hero-nightlife-rio-preto-XXoVWVWAEBTCpVUGzFnrkM.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fade-in-up 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(255, 0, 110, 0.6), 0 0 40px rgba(255, 0, 110, 0.3);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            animation: neon-glow 2s ease-in-out infinite;
+        }
+
+        .hero p {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--secondary);
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background-color: var(--primary);
+            color: #000000;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-button:hover {
+            box-shadow: 0 0 40px rgba(255, 0, 110, 0.8);
+            transform: scale(1.05);
+        }
+
+        .hero-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 217, 255, 0.5), transparent);
+            z-index: 2;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Categories Section */
+        .categories {
+            background-color: var(--background);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .categories-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .category-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: transparent;
+            color: var(--foreground);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .category-btn:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+        }
+
+        .category-btn.active {
+            background-color: var(--primary);
+            color: #000000;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        /* Bars Grid */
+        .bars-section {
+            background-color: var(--background);
+            padding: 5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .bar-card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            animation: fade-in-up 0.6s ease-out;
+        }
+
+        .bar-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.4);
+            transform: translateY(-8px);
+        }
+
+        .bar-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .bar-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .bar-card:hover .bar-image img {
+            transform: scale(1.1);
+        }
+
+        .bar-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+        }
+
+        .bar-highlight {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 0.75rem;
+            background-color: var(--accent);
+            color: #000000;
+            font-size: 0.875rem;
+            font-weight: bold;
+            border-radius: 9999px;
+            box-shadow: 0 0 15px rgba(255, 190, 11, 0.6);
+            z-index: 2;
+        }
+
+        .bar-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bar-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .bar-description {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .bar-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .bar-vibe {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.375rem 0.75rem;
+            background-color: rgba(0, 217, 255, 0.1);
+            color: var(--secondary);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 9999px;
+        }
+
+        .bar-arrow {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .bar-card:hover .bar-arrow {
+            transform: translateX(4px);
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--background);
+            border-top: 1px solid var(--border-color);
+            padding: 5rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.2);
+        }
+
+        .about-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: var(--secondary);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #CCCCCC;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: var(--secondary);
+            color: #000000;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .about-button:hover {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--background);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer p {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.875rem;
+            color: #666666;
+            margin-bottom: 1rem;
+        }
+
+        .footer small {
+            font-size: 0.75rem;
+            color: #444444;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .bars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>NOITE EM<br>RIO PRETO</h1>
+            <p>Descubra a energia vibrante da vida noturna</p>
+            <button class="hero-button" onclick="document.getElementById('bars').scrollIntoView({behavior: 'smooth'})">
+                Explorar Agora →
+            </button>
+        </div>
+        <div class="hero-line"></div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Preenchido por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bars Section -->
+    <section class="bars-section" id="bars">
+        <div class="container">
+            <div class="bars-grid" id="barsGrid">
+                <!-- Preenchido por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-grid">
+                <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/street-nightlife-abstract-2ndJVgxGDEtVCi5mZijnaf.webp" alt="Rio Preto Nightlife" class="about-image">
+                <div class="about-content">
+                    <h2>A Energia da Noite</h2>
+                    <p>São José do Rio Preto é um destino imperdível para quem busca viver a vida noturna com intensidade. Com uma cena vibrante de bares, casas noturnas e eventos, a cidade oferece experiências únicas para todos os gostos.</p>
+                    <p>Desde open bars animados até apresentações de bandas ao vivo, passando por gastronomia de alta qualidade e coquetelaria premium, Rio Preto tem tudo para uma noite inesquecível.</p>
+                    <button class="about-button">Saiba Mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Noite em Rio Preto. Guia completo de turismo noturno.</p>
+            <small>Explore a vida noturna de São José do Rio Preto</small>
+        </div>
+    </footer>
+
+    <script>
+        // Dados dos bares
+        const bars = [
+            {
+                id: 1,
+                name: "Rolê em Casa",
+                category: "dance",
+                description: "Open bar universitário com DJ até as 5 da manhã. Tema especial nos fins de semana.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/bar-neon-interior-WMv3vHBLWWEfjdyKPVDvts.webp",
+                highlight: "Open Bar 24h",
+                vibe: "Dança",
+            },
+            {
+                id: 2,
+                name: "La Cancha",
+                category: "music",
+                description: "Música ao vivo com estilos variados. Transmissão de jogos e ambiente confortável.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/bar-neon-interior-WMv3vHBLWWEfjdyKPVDvts.webp",
+                highlight: "Música ao Vivo",
+                vibe: "Variado",
+            },
+            {
+                id: 3,
+                name: "A Caverna",
+                category: "rock",
+                description: "Bar descontraído especializado em rock. Ambiente agradável e programação especial.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/bar-neon-interior-WMv3vHBLWWEfjdyKPVDvts.webp",
+                highlight: "Rock & Descontração",
+                vibe: "Rock",
+            },
+            {
+                id: 4,
+                name: "Made in Brazil",
+                category: "dance",
+                description: "Black music e dança em grupo. Vibe gostosa para se soltar sem pressão.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/music-event-crowd-SpamaoQPcxHsE4AHs43Vsc.webp",
+                highlight: "Black Music",
+                vibe: "Dança",
+            },
+            {
+                id: 5,
+                name: "Bar da Várzea",
+                category: "sports",
+                description: "Temático de futebol. Perfeito para assistir jogos com amigos e aproveitar a comida.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/bar-neon-interior-WMv3vHBLWWEfjdyKPVDvts.webp",
+                highlight: "Futebol & Comida",
+                vibe: "Esportes",
+            },
+            {
+                id: 6,
+                name: "Vila Dionísio",
+                category: "rock",
+                description: "Bandas ao vivo, principalmente rock. Clima animado e acolhedor. Melhor coxinha do universo!",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/bar-neon-interior-WMv3vHBLWWEfjdyKPVDvts.webp",
+                highlight: "Bandas Ao Vivo",
+                vibe: "Rock",
+            },
+            {
+                id: 7,
+                name: "Chico Barrigudo",
+                category: "food",
+                description: "Ambiente descontraído com boa comida e cervejas artesanais. Happy hour de terça a quinta.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/cocktail-drinks-neon-Aw97MjXRcW6kWYQ8Pow5mG.webp",
+                highlight: "Cervejas Artesanais",
+                vibe: "Boteco",
+            },
+            {
+                id: 8,
+                name: "Prozaria",
+                category: "food",
+                description: "Alta coquetelaria e cardápio sazonal. Drinks autorais e pizzas especiais.",
+                image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663410573180/4waVJr8z537ozS7mayqE7J/cocktail-drinks-neon-Aw97MjXRcW6kWYQ8Pow5mG.webp",
+                highlight: "Coquetelaria Premium",
+                vibe: "Sofisticado",
+            },
+        ];
+
+        const categories = [
+            { id: "all", label: "Todos" },
+            { id: "dance", label: "Dança" },
+            { id: "music", label: "Música" },
+            { id: "rock", label: "Rock" },
+            { id: "food", label: "Gastronomia" },
+            { id: "sports", label: "Esportes" },
+        ];
+
+        let activeCategory = "all";
+
+        // Renderizar categorias
+        function renderCategories() {
+            const grid = document.getElementById("categoriesGrid");
+            grid.innerHTML = categories.map(cat => `
+                <button class="category-btn ${cat.id === "all" ? "active" : ""}" onclick="filterBars('${cat.id}')">
+                    ${cat.label}
+                </button>
+            `).join("");
+        }
+
+        // Filtrar e renderizar bares
+        function filterBars(category) {
+            activeCategory = category;
+            
+            // Atualizar botões ativos
+            document.querySelectorAll(".category-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            // Renderizar bares
+            renderBars();
+        }
+
+        function renderBars() {
+            const grid = document.getElementById("barsGrid");
+            const filtered = activeCategory === "all" 
+                ? bars 
+                : bars.filter(bar => bar.category === activeCategory);
+
+            grid.innerHTML = filtered.map((bar, index) => `
+                <div class="bar-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="bar-image">
+                        <img src="${bar.image}" alt="${bar.name}">
+                        <div class="bar-highlight">${bar.highlight}</div>
+                    </div>
+                    <div class="bar-content">
+                        <h3 class="bar-title">${bar.name}</h3>
+                        <p class="bar-description">${bar.description}</p>
+                        <div class="bar-footer">
+                            <span class="bar-vibe">${bar.vibe}</span>
+                            <span class="bar-arrow">→</span>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        // Inicializar
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCategories();
+            renderBars();
+        });
+    </script>
+</body>
+</html>
